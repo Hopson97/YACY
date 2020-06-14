@@ -1,18 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/LevelBrowser/Browser.gd" type="Script" id=1]
 [ext_resource path="res://scripts/GameWorld/LegacyWorldLoader.gdns" type="Script" id=2]
 [ext_resource path="res://scripts/LegacyLevel.gd" type="Script" id=3]
 [ext_resource path="res://scripts/GameWorld/LoadLegacyObjects.gd" type="Script" id=4]
 [ext_resource path="res://scripts/GameWorld/GenerateFloor.gdns" type="Script" id=5]
+[ext_resource path="res://Scenes/DefaultEnv.tscn" type="PackedScene" id=6]
 
-[node name="Control" type="Control"]
+[node name="Spatial" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+Loader = NodePath("../Spatial/LegacyLevel/ObjectLoader")
 
 [node name="Levels" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -34,3 +36,5 @@ script = ExtResource( 4 )
 
 [node name="FloorGenerator" type="Node" parent="."]
 script = ExtResource( 5 )
+
+[node name="Environment" parent="." instance=ExtResource( 6 )]
