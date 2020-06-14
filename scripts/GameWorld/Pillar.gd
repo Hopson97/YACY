@@ -11,7 +11,7 @@ var level : int
 var texture : int = 4
 var colour := Color(1, 1, 1)
 
-var size : int = 0
+var size : int = 1
 var diagonal : bool = false
 
 var max_height : float = 1.0
@@ -62,19 +62,27 @@ func get_property_dict() -> Dictionary:
 	var dict : Dictionary = {}
 	dict["Texture"] = texture 
 	dict["Colour"] = colour
-	dict["MinMaxHeight"] = Vector2(min_height, max_height)
+	dict["Height"] = Vector2(min_height, max_height)
 	dict["PillarSize"] = size
 	dict["Diagonal"] = diagonal
 	
 	return dict
 
+const dictToObj = {
+	"Texture":"texture", 
+	"Colour":"colour",
+	"PillarSize":"size",
+	"Diagonal":"diagonal",
+	"Height":"minmaxVector2"
+}
+
+var minmaxVector2 : Vector2 = Vector2(1, 0) # DONT WRITE TO THIS
 func set_property_dict(dict : Dictionary):
-	texture = dict["Texture"]
-	colour = dict["Colour"]
-	min_height = dict["MinMaxHeight"].x
-	max_height = dict["MinMaxHeight"].y
-	size = dict["PillarSize"]
-	diagonal = dict["Diagonal"]
+	for prop in dictToObj:
+		set(dictToObj[prop], dict[prop])
+	
+	min_height = minmaxVector2.x
+	max_height = minmaxVector2.y
 
 func _genMesh():
 	mesh.mesh = buildMesh(level, false)
@@ -223,3 +231,29 @@ func _createPlatQuadMesh(surface_tool : SurfaceTool, wall_vertices : Array, sInd
 	# Quad Indices
 	for idx in quad_indices:
 		surface_tool.add_index(sIndex + idx)
+
+func JSON_serialise(default_dict) -> Dictionary:
+	# Only add values that differ from the default
+	var dict = get_property_dict()
+	for k in dict.keys():
+		if dict[k] == default_dict[k]:
+			dict.erase(k)
+	
+	# Add unique variables
+	dict["Lvl"] = level
+	dict["Pos"] = pos
+	
+	# Colours should be serialised into a smaller format
+	if dict.has("Colour"):
+		dict["Colour"] = dict["Colour"].to_html()
+	
+	return dict
+
+func JSON_deserialise(dict):
+	for k in dict.keys():
+		if dictToObj.has(k) :
+			var property = self.get(dictToObj.get(k)) 
+			self.set(dictToObj.get(k), Utils.json2obj(dict[k], property))
+	
+	min_height = minmaxVector2.x
+	max_height = minmaxVector2.y

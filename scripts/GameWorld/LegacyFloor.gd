@@ -5,7 +5,17 @@ const canPlace = false
 const onePerLevel = true
 const hasDefaultObject = false
 
-var vertices : Array
+const default_dict = {
+	"Visible": false,
+	"Points": [Vector2(0, 10), Vector2(10, 10), Vector2(10, 0), Vector2(0, 0)],
+	
+	"Texture": 1,
+	"Colour": Color(1, 1, 1),
+	"C_Texture": 1,
+	"C_Colour": Color(1, 1, 1)
+}
+
+var vertices : PoolVector2Array
 var level : int
 var isVisible : bool
 
@@ -75,12 +85,50 @@ func get_property_dict() -> Dictionary:
 	
 	return dict
 
+const dictToObj = {
+	"Texture":"floor_texture", 
+	"Colour":"floor_colour",
+	"Visible":"isVisible",
+}
+
 func set_property_dict(dict : Dictionary):
-	isVisible = dict["Visible"]
-	floor_texture = dict["Texture"]
-	floor_colour = dict["Colour"]
+	for prop in dictToObj:
+		set(dictToObj[prop], dict[prop])
 
 func buildFloor() -> Mesh:
 	var gen = get_node("/root/Spatial/FloorGenerator")
 	return gen.generateFloorMesh(vertices, level, floor_texture, 
 		floor_colour, ceil_texture, ceil_colour, HoleManager.get_holes(level))
+
+func JSON_serialise() -> Dictionary:
+	# Only add values that differ from the default
+	var dict = get_property_dict()
+	for k in dict.keys():
+		if dict[k] == default_dict[k]:
+			dict.erase(k)
+	
+	# Only add vertices to the serialiser if they are different from the default
+	var no_change_in_vertices = true
+	for vtx in range(0, vertices.size()):
+		if vertices[vtx] != default_dict["Points"][vtx]:
+			no_change_in_vertices = false
+	
+	if not no_change_in_vertices:
+		dict["Points"] = vertices
+	
+	# Colours should be serialised into a smaller format
+	if dict.has("Colour"):
+		dict["Colour"] = dict["Colour"].to_html()
+	if dict.has("C_Colour"):
+		dict["C_Colour"] = dict["C_Colour"].to_html()
+	
+	return dict
+
+func JSON_deserialise(dict):
+	for k in dict.keys():
+		if dictToObj.has(k):
+			var property = self.get(dictToObj.get(k)) 
+			self.set(dictToObj.get(k), Utils.json2obj(dict[k], property))
+	
+	if dict.has("Points"):
+		vertices = Utils.json2obj(dict["Points"], vertices)
