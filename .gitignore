@@ -8,6 +8,9 @@ godot-cpp/*
 godot-cpp
 api.json
 
+
+godot-cpp/godot-headers/*
+
 # Mono-specific ignores
 .mono/
 
@@ -25,3 +28,5 @@ obj/*
 *.os
 core
 .vscode/*
+
+Levels/
