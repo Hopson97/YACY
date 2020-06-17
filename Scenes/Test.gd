@@ -54,7 +54,7 @@ func _on_Button_pressed():
 	var level = levels[rng.randi_range(0, levels.size() - 1)]
 	print(level)
 	
-	get_parent().loadLevelFromFilesystem("res://cg/" + level)
+	get_parent().loadLevelFromFilesystem("res://cg/" + "61866.Hampster Rescue.Cool_Games.cy")
 	#get_parent().loadLevelFromFilesystem("user://lol.cy")
 	get_parent().get_parent().get_node("LegacyLevel").call("spawnPlayer")
 	set_disabled(true)

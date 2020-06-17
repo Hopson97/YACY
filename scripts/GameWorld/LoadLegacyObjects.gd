@@ -152,7 +152,7 @@ func create_spawn(pos : Vector2, direction : int, level : int):
 	new_spawn.set_name("SpawnLocation")
 	
 	pos = pos / 5.0
-	new_spawn.set_translation(Vector3(pos.x, (level - 1) * WorldConstants.LEVEL_HEIGHT + 0.001, pos.y))
+	new_spawn.set_translation(Vector3(pos.x, (level - 1) * WorldConstants.LEVEL_HEIGHT + 0.003, pos.y))
 	
 	match (direction):
 		1: new_spawn.set_rotation_degrees(Vector3(0, 0, 0))
@@ -192,7 +192,9 @@ func create_msgBoard(pos : Vector2, msg : String, direction : int, height: int, 
 func create_portal(pos : Vector2, title : String, condition : int, gameNumber: String, level : int):
 	var new_portal = preload("res://Entities/Legacy/Portal/Portal.tscn").instance()
 	new_portal.get_node("Viewport/Text").set_text(title)
-	print(title)
+	gameNumber = gameNumber.substr(1, gameNumber.length() - 2)
+	if gameNumber.is_valid_integer():
+		new_portal.set_gameNumber(int(gameNumber))
 	
 	var t = new_portal.get_node("Viewport").get_texture()
 	new_portal.get_node("TextArea").get_surface_material(0).albedo_texture = t
