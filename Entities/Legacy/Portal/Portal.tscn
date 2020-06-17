@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Entities/Legacy/Portal/portal.png" type="Texture" id=2]
+[ext_resource path="res://res/fonts/arial.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="ArrayMesh" id=1]
+resource_name = "Circle.003"
+surfaces/0 = {
+"aabb": AABB( -0.866025, 0, -1, 1.73205, 1.95803, 1.50001 ),
+"array_data": PoolByteArray( 215, 179, 93, 191, 136, 160, 250, 63, 2, 0, 0, 63, 0, 127, 0, 0, 109, 0, 193, 129, 209, 58, 120, 47, 217, 179, 93, 63, 136, 160, 250, 63, 253, 255, 255, 62, 0, 127, 0, 0, 109, 0, 193, 129, 197, 59, 72, 40, 0, 0, 0, 0, 136, 160, 250, 63, 0, 0, 128, 191, 0, 127, 0, 0, 109, 0, 193, 129, 197, 59, 102, 50, 215, 179, 93, 191, 0, 0, 0, 0, 2, 0, 0, 63, 0, 129, 0, 0, 109, 0, 193, 129, 219, 58, 184, 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 191, 0, 129, 0, 0, 109, 0, 193, 129, 153, 59, 40, 43, 217, 179, 93, 63, 0, 0, 0, 0, 253, 255, 255, 62, 0, 129, 0, 0, 109, 0, 193, 129, 153, 59, 238, 49 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 3, 0, 5, 0, 4, 0 ),
+"blend_shape_data": [  ],
+"format": 97559,
+"index_count": 6,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 6
+}
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="ArrayMesh" id=3]
+surfaces/0 = {
+"aabb": AABB( -0.866025, 0, -1, 1.73205, 1.95803, 1.5 ),
+"array_data": PoolByteArray( 0, 0, 0, 0, 136, 160, 250, 63, 0, 0, 128, 191, 109, 0, 193, 0, 193, 0, 147, 127, 200, 58, 144, 30, 217, 179, 93, 63, 0, 0, 0, 0, 253, 255, 255, 62, 109, 0, 193, 0, 193, 0, 147, 127, 154, 29, 239, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 191, 109, 0, 193, 0, 193, 0, 147, 127, 200, 58, 239, 58, 217, 179, 93, 63, 136, 160, 250, 63, 253, 255, 255, 62, 0, 0, 127, 0, 126, 0, 0, 127, 204, 58, 1, 32, 215, 179, 93, 191, 0, 0, 0, 0, 2, 0, 0, 63, 0, 0, 127, 0, 126, 0, 0, 127, 119, 31, 242, 58, 217, 179, 93, 63, 0, 0, 0, 0, 253, 255, 255, 62, 0, 0, 127, 0, 127, 0, 0, 127, 204, 58, 242, 58, 215, 179, 93, 191, 136, 160, 250, 63, 2, 0, 0, 63, 147, 0, 193, 0, 193, 0, 109, 127, 204, 58, 1, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 191, 147, 0, 193, 0, 193, 0, 109, 127, 119, 31, 242, 58, 215, 179, 93, 191, 0, 0, 0, 0, 2, 0, 0, 63, 147, 0, 193, 0, 193, 0, 109, 127, 204, 58, 242, 58, 217, 179, 93, 63, 136, 160, 250, 63, 253, 255, 255, 62, 109, 0, 193, 0, 193, 0, 147, 127, 154, 29, 144, 30, 215, 179, 93, 191, 136, 160, 250, 63, 2, 0, 0, 63, 0, 0, 127, 0, 127, 0, 0, 127, 119, 31, 1, 32, 0, 0, 0, 0, 136, 160, 250, 63, 0, 0, 128, 191, 147, 0, 193, 0, 193, 0, 109, 127, 119, 31, 1, 32 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 3, 0, 5, 0, 4, 0, 6, 0, 8, 0, 7, 0, 0, 0, 1, 0, 9, 0, 3, 0, 4, 0, 10, 0, 6, 0, 7, 0, 11, 0 ),
+"blend_shape_data": [  ],
+"format": 97559,
+"index_count": 18,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 12
+}
+
+[sub_resource type="ViewportTexture" id=4]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="SpatialMaterial" id=5]
+resource_local_to_scene = true
+albedo_texture = SubResource( 4 )
+uv1_scale = Vector3( 1.135, 1.135, 1 )
+uv1_offset = Vector3( 0.015, 0.01, 0 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 0.356863 )
+font_data = ExtResource( 3 )
+
+[node name="untitled" type="Spatial"]
+
+[node name="Top" type="MeshInstance" parent="."]
+transform = Transform( 0.82, 0, 0, 0, 0.82, 0, 0, 0, 0.82, 0, 0.15, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 7 )
+
+[node name="TextArea" type="MeshInstance" parent="."]
+transform = Transform( 0.82, 0, 0, 0, 0.82, 0, 0, 0, 0.82, 0, 0.15, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 5 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 512, 384 )
+hdr = false
+disable_3d = true
+usage = 0
+render_target_v_flip = true
+gui_disable_input = true
+
+[node name="FrontTexture" type="TextureRect" parent="Viewport"]
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 585.0
+margin_bottom = 435.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Text" type="Label" parent="Viewport"]
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 80.0
+margin_right = 496.0
+margin_bottom = -4.0
+custom_fonts/font = SubResource( 6 )
+text = "Message"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
